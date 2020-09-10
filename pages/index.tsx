@@ -1,6 +1,6 @@
 // import Head from 'next/head'
 import React, { useCallback, useState, FormEvent } from "react";
-import { Flex, Input, Image, Button, Text } from "@chakra-ui/core";
+import { Flex, Input, Button, Text } from "@chakra-ui/core";
 import axios from "axios";
 
 export default function Home() {
