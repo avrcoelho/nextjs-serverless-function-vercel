@@ -31,8 +31,6 @@ export default function Home() {
         width="100%"
         maxW="400px"
       >
-        <Image marginBottom={8} src="/rocketseat.svg" alt="Rocketseat" />
-
         <Text
           textAlign="center"
           fontSize="sm"
