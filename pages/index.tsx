@@ -2,9 +2,11 @@
 import React, { useCallback, useState, FormEvent } from "react";
 import { Flex, Input, Button, Text } from "@chakra-ui/core";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState("");
 
   const handleSignUpToNewsletter = useCallback(
     async (event: FormEvent) => {
@@ -12,10 +14,15 @@ export default function Home() {
 
       await axios.post("/api/subscribe", {
         email,
+        recaptchaToken,
       });
     },
-    [email]
+    [email, recaptchaToken]
   );
+
+  const onChangeCaptcha = useCallback((token: string) => {
+    setRecaptchaToken(token);
+  }, []);
 
   return (
     <Flex as="main" height="100vh" justifyContent="center" alignItems="center">
@@ -44,8 +51,14 @@ export default function Home() {
         <Input
           placeholder="Seu melhor e-mail"
           marginTop={2}
+          marginBottom={4}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <ReCAPTCHA
+          sitekey="6LedesoZAAAAAPxor5VqoJ2flq_-stzoQasfbDdt"
+          onChange={onChangeCaptcha}
         />
 
         <Button
